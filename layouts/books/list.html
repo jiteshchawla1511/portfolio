@@ -1,0 +1,215 @@
+{{- define "main" }}
+<div class="post-header">
+  <h1 class="post-title">{{ .Title }}</h1>
+  <p style="color: var(--secondary);">{{ .Params.description | default "Books I'm reading, have read, and want to read."
+    }}</p>
+</div>
+
+<style>
+  /* ── Filter bar ─────────────────────────────────────── */
+  .filter-bar {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.25rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--secondary);
+    cursor: pointer;
+    font-size: 0.78rem;
+    transition: all 0.18s;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: var(--primary);
+    color: var(--theme);
+    border-color: var(--primary);
+  }
+
+  /* ── Section label ──────────────────────────────────── */
+  .section-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 1.75rem 0 0.85rem;
+  }
+
+  /* ── Grid ───────────────────────────────────────────── */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    gap: 1rem;
+  }
+
+  /* ── Book card — cover IS the card ─────────────────── */
+  .book-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 2 / 3;
+    cursor: default;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+
+  .book-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Cover fills the whole card */
+  .book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.22s ease;
+  }
+
+  .book-card:hover .book-cover {
+    filter: brightness(0.55);
+  }
+
+  /* Gradient overlay — always visible at bottom */
+  .book-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0.18) 45%,
+        transparent 70%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0.6rem 0.55rem 0.55rem;
+    opacity: 1;
+    transition: opacity 0.22s ease;
+  }
+
+  .book-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 0.15rem;
+  }
+
+  .book-author {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.2;
+  }
+
+  /* Status badge — top-right corner */
+  .book-status {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.45rem;
+    padding: 0.12rem 0.45rem;
+    border-radius: 20px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+  }
+
+  .status-reading {
+    background: rgba(34, 197, 94, 0.25);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.4);
+  }
+
+  .status-finished {
+    background: rgba(59, 130, 246, 0.25);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.4);
+  }
+
+  .status-want {
+    background: rgba(245, 158, 11, 0.25);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+  }
+</style>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterBooks('all', this)">All</button>
+  <button class="filter-btn" onclick="filterBooks('reading', this)">📖 Reading</button>
+  <button class="filter-btn" onclick="filterBooks('finished', this)">✅ Finished</button>
+  <button class="filter-btn" onclick="filterBooks('want', this)">🔖 Want to Read</button>
+</div>
+
+{{ $reading := where .Pages "Params.status" "Reading" }}
+{{ $finished := where .Pages "Params.status" "Finished" }}
+{{ $want := where .Pages "Params.status" "Want to Read" }}
+
+{{ if $reading }}
+<div class="section-title" data-section="reading">📖 Currently Reading</div>
+<div class="books-grid" data-section="reading">
+  {{ range $reading }}
+  <div class="book-card" data-status="reading">
+    <img class="book-cover" src="{{ .Params.bookCover }}" alt="{{ .Title }}" loading="lazy"
+      onerror="this.src='https://via.placeholder.com/130x195/1a1a2e/ffffff?text=📖'">
+    <span class="book-status status-reading">Reading</span>
+    <div class="book-overlay">
+      <div class="book-title">{{ .Title }}</div>
+      <div class="book-author">{{ .Params.author }}</div>
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ if $finished }}
+<div class="section-title" data-section="finished">✅ Finished</div>
+<div class="books-grid" data-section="finished">
+  {{ range $finished }}
+  <div class="book-card" data-status="finished">
+    <img class="book-cover" src="{{ .Params.bookCover }}" alt="{{ .Title }}" loading="lazy"
+      onerror="this.src='https://via.placeholder.com/130x195/1a1a2e/ffffff?text=📚'">
+    <span class="book-status status-finished">Finished</span>
+    <div class="book-overlay">
+      <div class="book-title">{{ .Title }}</div>
+      <div class="book-author">{{ .Params.author }}</div>
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ if $want }}
+<div class="section-title" data-section="want">🔖 Want to Read</div>
+<div class="books-grid" data-section="want">
+  {{ range $want }}
+  <div class="book-card" data-status="want">
+    <img class="book-cover" src="{{ .Params.bookCover }}" alt="{{ .Title }}" loading="lazy"
+      onerror="this.src='https://via.placeholder.com/130x195/1a1a2e/ffffff?text=🔖'">
+    <span class="book-status status-want">Want</span>
+    <div class="book-overlay">
+      <div class="book-title">{{ .Title }}</div>
+      <div class="book-author">{{ .Params.author }}</div>
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+<script>
+  function filterBooks(filter, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('[data-section]').forEach(el => {
+      el.style.display = (filter === 'all' || el.dataset.section === filter) ? '' : 'none';
+    });
+  }
+</script>
+{{- end }}

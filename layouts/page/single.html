@@ -1,0 +1,171 @@
+{{- define "main" }}
+
+<style>
+/* ── About hero ─────────────────────────────── */
+.about-hero {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin: 2rem 0 3rem;
+  flex-wrap: wrap;
+}
+.about-photo-wrap {
+  flex-shrink: 0;
+}
+.about-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  display: block;
+  transition: transform 0.3s ease;
+}
+.about-photo:hover {
+  transform: scale(1.03);
+}
+.about-photo-placeholder {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed33, #3b82f633);
+  border: 3px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+.about-intro {
+  flex: 1;
+  min-width: 220px;
+}
+.about-intro h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0 0 0.25rem;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+.about-role {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  margin: 0 0 1rem;
+  font-weight: 500;
+}
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+.about-tag {
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--secondary);
+}
+.about-socials {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.about-socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--secondary);
+  text-decoration: none;
+  transition: all 0.18s;
+}
+.about-socials a:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ── Content body ───────────────────────────── */
+.about-body {
+  max-width: 680px;
+}
+.about-body h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--primary);
+}
+.about-body p {
+  color: var(--secondary);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.about-body ul {
+  color: var(--secondary);
+  line-height: 1.8;
+  padding-left: 1.25rem;
+}
+.about-body a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 540px) {
+  .about-hero { flex-direction: column; align-items: center; text-align: center; }
+  .about-tags, .about-socials { justify-content: center; }
+}
+</style>
+
+<div class="about-hero">
+  <div class="about-photo-wrap">
+    {{- with .Params.photo }}
+    <img class="about-photo" src="{{ . }}" alt="{{ $.Params.photoAlt | default "Photo" }}">
+    {{- else }}
+    <div class="about-photo-placeholder">🧑‍💻</div>
+    {{- end }}
+  </div>
+
+  <div class="about-intro">
+    <h1>{{ .Params.name | default .Title }}</h1>
+    <p class="about-role">{{ .Params.role | default "Software Engineer" }}</p>
+
+    {{- with .Params.tags }}
+    <div class="about-tags">
+      {{- range . }}
+      <span class="about-tag">{{ . }}</span>
+      {{- end }}
+    </div>
+    {{- end }}
+
+    <div class="about-socials">
+      {{- with .Params.github }}<a href="{{ . }}" target="_blank" rel="noopener">
+        <svg height="13" width="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>{{- end }}
+      {{- with .Params.linkedin }}<a href="{{ . }}" target="_blank" rel="noopener">
+        <svg height="13" width="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>{{- end }}
+      {{- with .Params.twitter }}<a href="{{ . }}" target="_blank" rel="noopener">
+        <svg height="13" width="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        Twitter
+      </a>{{- end }}
+      {{- with .Params.email }}<a href="mailto:{{ . }}">📧 Email</a>{{- end }}
+      {{- with .Params.resume }}<a href="{{ . }}" target="_blank" rel="noopener">📄 Resume</a>{{- end }}
+    </div>
+  </div>
+</div>
+
+<div class="about-body">
+  {{ .Content }}
+</div>
+
+{{- end }}

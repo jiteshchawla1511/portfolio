@@ -1,0 +1,75 @@
+{{- define "main" }}
+
+<style>
+.home-hero { padding: 3.5rem 0 2.5rem; }
+.home-greeting {
+  font-size: 0.8rem; font-weight: 600; color: var(--secondary);
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem;
+}
+.home-title {
+  font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800;
+  line-height: 1.15; margin: 0 0 1.25rem; color: var(--primary); letter-spacing: -0.02em;
+}
+.home-title .wave {
+  display: inline-block; animation: wave 2.5s ease-in-out infinite; transform-origin: 70% 70%;
+}
+@keyframes wave {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10%, 30%      { transform: rotate(14deg); }
+  20%           { transform: rotate(-8deg); }
+  40%           { transform: rotate(-4deg); }
+  50%           { transform: rotate(10deg); }
+}
+.home-desc {
+  font-size: 1.05rem; line-height: 1.85; color: var(--secondary);
+  max-width: 580px; margin: 0 0 2rem;
+}
+.home-desc strong { color: var(--primary); font-weight: 600; }
+.section-divider {
+  display: flex; align-items: center; gap: 0.75rem; margin: 0 0 1.5rem;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--secondary);
+}
+.section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+</style>
+
+<div class="home-hero">
+  <div class="home-greeting">Welcome</div>
+  <h1 class="home-title">
+    <span class="wave">👋</span> Hey, I'm Jitesh.
+  </h1>
+  <p class="home-desc">
+    This is <strong>my space on the internet</strong> — where I write about things I learn,
+    think about, and can't stop obsessing over.<br><br>
+    Expect posts on <strong>software engineering</strong>, deep-dives into
+    <strong>fighter jets</strong> and sports, notes from <strong>books I'm reading</strong>,
+    and whatever else catches my attention. No algorithm. No filters. Just honest writing.
+  </p>
+</div>
+
+{{- $pages := where site.RegularPages "Type" "in" (slice "posts") }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+{{- $recent := first 5 $pages }}
+
+{{- if $recent }}
+<div class="section-divider">✍️ Recent Writing</div>
+{{- range $recent }}
+<article class="post-entry">
+  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+  {{- partial "cover.html" (dict "cxt" . "IsHome" true "isHidden" $isHidden) }}
+  <header class="entry-header"><h2>{{- .Title }}</h2></header>
+  {{- if (ne (.Param "hideSummary") true) }}
+  <div class="entry-content"><p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p></div>
+  {{- end }}
+  {{- if not (.Param "hideMeta") }}
+  <footer class="entry-footer">{{- partial "post_meta.html" . -}}</footer>
+  {{- end }}
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end }}
+<div style="text-align:center; margin:1.5rem 0 0.5rem;">
+  <a href="/posts/" style="display:inline-block;padding:0.5rem 1.5rem;border-radius:8px;border:1px solid var(--border);color:var(--secondary);font-size:0.85rem;font-weight:500;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--secondary)'">All posts →</a>
+</div>
+{{- end }}
+
+{{- end }}

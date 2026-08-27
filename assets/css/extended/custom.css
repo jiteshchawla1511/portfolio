@@ -1,0 +1,131 @@
+/* ═══════════════════════════════════════════════════
+   Custom overrides for Jitesh's portfolio
+   ─ Brighter text, more spacing, larger font
+   ═══════════════════════════════════════════════════ */
+
+/* ── Typography scale ─────────────────────────────── */
+body {
+  font-size: 18px;           /* increased */
+  line-height: 1.85;         /* more breathing room */
+}
+
+/* ── Slightly brighten secondary text in dark mode ─ */
+.dark {
+  --secondary: rgb(175, 176, 177);
+}
+
+/* ── Post / page content text ──────────────────────── */
+.post-content,
+.post-content p,
+.about-body p,
+.about-body li {
+  color: var(--content);   /* same as blog post body */
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+/* ── Post entry summaries on list pages ────────────── */
+.entry-content p {
+  color: var(--secondary);
+}
+
+/* ── Headings ──────────────────────────────────────── */
+h1, h2, h3, h4 {
+  letter-spacing: -0.015em;
+}
+.post-content h2 {
+  font-size: 1.4rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+}
+.post-content h3 {
+  font-size: 1.15rem;
+  margin-top: 1.75rem;
+}
+
+/* ── More padding in post body ─────────────────────── */
+.post-single {
+  max-width: 720px;
+}
+article.post-single .post-content {
+  margin-top: 1.5rem;
+}
+
+/* ── More spacing between list entries ─────────────── */
+.post-entry {
+  margin-bottom: 1rem;
+  padding: 1.4rem;
+}
+
+/* ── About page text ───────────────────────────────── */
+.about-body p,
+.about-body li {
+  font-size: 1.05rem;
+  color: var(--content);
+  line-height: 1.9;
+}
+.about-desc {
+  font-size: 1.1rem !important;
+  color: var(--secondary) !important;
+  line-height: 1.9 !important;
+}
+
+/* ── Home page description ─────────────────────────── */
+.home-desc {
+  font-size: 1.12rem !important;
+  color: var(--secondary) !important;
+  line-height: 1.9 !important;
+}
+
+/* ── Nav links brighter ────────────────────────────── */
+#menu-close-btn, .menu a {
+  font-size: 0.95rem;
+}
+
+/* ── Meta text (date, reading time) ───────────────── */
+.post-meta, .entry-footer {
+  font-size: 0.82rem;
+  color: var(--secondary);
+}
+
+/* ── Code blocks ───────────────────────────────────── */
+.post-content code {
+  font-size: 0.9rem;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+/* ── Blockquotes ───────────────────────────────────── */
+.post-content blockquote {
+  border-left: 3px solid #7c3aed;
+  padding-left: 1.25rem;
+  color: var(--secondary);
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+
+/* ── Bigger font sizes (additional boost) ──────────── */
+.post-content p,
+.post-content li,
+.about-body p,
+.about-body li {
+  font-size: 1.12rem !important;
+}
+
+.home-desc {
+  font-size: 1.18rem !important;
+}
+
+.entry-content p {
+  font-size: 1rem !important;
+}
+
+.post-title {
+  font-size: 2rem !important;
+}
+
+/* Site header logo text */
+#site-header .logo, .logo, a.logo {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+}
