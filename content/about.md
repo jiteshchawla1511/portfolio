@@ -32,15 +32,17 @@ When I'm not writing code, I'm usually deep in something that has nothing to do 
 
 ## Outside of work
 
-I'm a massive **FC Barcelona** fan — the kind who'll stay up for a midnight kickoff without a second thought. Football is the sport I care most about, but I also follow hockey and tennis closely. Sport, for me, is never just about the result. It's tactics, history, culture, and the stories behind it.
+I'm a massive **FC Barcelona** fan. Football is the sport I love the most, but I closely follow tennis and hockey as well. I picked up hockey when I was a kid and played at the state level in Haryana. More recently, I started playing tennis and have been slowly getting better at it.
 
-I play the **piano** — not seriously enough to perform, but seriously enough to lose an hour without noticing. Music is one of those things I don't talk about much but think about a lot.
+For me, sport has never been just about the result. I'm fascinated by the tactics, history, culture, and stories behind it.
 
-I read a lot. **History, non-fiction, maths, physics** — anything that gives me a better mental model of how the world actually works. I'm not picky about topics. If something genuinely interests me, I'll go deep on it. Fighter jets, economic theory, the French Revolution, orbital mechanics — fair game.
+I also play the **piano** and read a bit. **History, non-fiction, maths, physics** — I'm drawn to anything that gives me a better mental model of how the world actually works. I'm not particularly picky about topics; if something genuinely interests me, I tend to go deep down the rabbit hole.
 
-Same goes for **movies**. I watch a lot, across languages and genres. A great film does something a book can't, and vice versa.
+The same goes for **movies**. I watch a lot of them, across languages and genres. I think a great film can do something a book can't, and vice versa.
 
-I also enjoy **photography** — mostly candid moments and whatever catches my eye. Some of my shots are [here](/photos/).
+I also enjoy **photography**, although I'm still figuring out what I'm doing behind the camera. Some of my shots are [here](/photos/).
+
+And yes, I **cook** too. Some of the results are good enough to [photograph](/food/). :P
 
 ---
 
