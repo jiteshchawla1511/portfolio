@@ -87,8 +87,8 @@
 {{- if gt (len $validImages) 0 }}
 <div class="food-grid">
   {{- range $validImages }}
-  <div class="food-item" onclick="openLightbox('{{ printf "images/food/%s" . | absURL }}')">
-    <img src="{{ printf "images/food/%s" . | absURL }}" alt="Food by Jitesh Chawla" loading="lazy">
+  <div class="food-item" onclick="openLightbox('/images/food/{{ . }}')">
+    <img src="/images/food/{{ . }}" alt="Food by Jitesh Chawla" loading="lazy">
   </div>
   {{- end }}
 </div>
