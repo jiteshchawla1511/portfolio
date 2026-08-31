@@ -5,8 +5,7 @@ url: "/about/"
 summary: "about"
 
 # ── Your photo ─────────────────────────────────────────
-# Option 1: URL (e.g. your LinkedIn photo, GitHub avatar)
-photo: "https://avatars.githubusercontent.com/u/583231"
+photo: "/images/profile.jpg"
 photoAlt: "Jitesh Chawla"
 
 # Option 2: Local file — drop your photo in static/images/
@@ -40,9 +39,9 @@ I also play the **piano** and read a bit. **History, non-fiction, maths, physics
 
 The same goes for **movies**. I watch a lot of them, across languages and genres. I think a great film can do something a book can't, and vice versa.
 
-I also enjoy **photography**, although I'm still figuring out what I'm doing behind the camera. Some of my shots are [here](/photos/).
+I also enjoy **photography**, although I'm still figuring out what I'm doing behind the camera. Some of my shots are [here]({{< ref "photos" >}}).
 
-And yes, I **cook** too. Some of the results are good enough to [photograph](/food/). :P
+And yes, I **cook** too. Some of the results are good enough to [photograph]({{< ref "food" >}}). :P
 
 ---
 
