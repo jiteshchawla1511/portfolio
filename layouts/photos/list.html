@@ -79,8 +79,8 @@
 <div class="gallery-grid">
   {{- range $images }}
   {{- if or (strings.HasSuffix .Name ".jpg") (strings.HasSuffix .Name ".jpeg") (strings.HasSuffix .Name ".png") (strings.HasSuffix .Name ".webp") }}
-  <div class="gallery-item" onclick="openLightbox('{{ printf "images/gallery/%s" .Name | absURL }}')">
-    <img src="{{ printf "images/gallery/%s" .Name | absURL }}" alt="Photo by Jitesh Chawla" loading="lazy">
+  <div class="gallery-item" onclick="openLightbox('{{ printf "images/gallery/%s" .Name | relURL }}')">
+    <img src="{{ printf "images/gallery/%s" .Name | relURL }}" alt="Photo by Jitesh Chawla" loading="lazy">
   </div>
   {{- end }}
   {{- end }}

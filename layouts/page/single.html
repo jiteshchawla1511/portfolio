@@ -127,7 +127,11 @@
 <div class="about-hero">
   <div class="about-photo-wrap">
     {{- with .Params.photo }}
+    {{- if hasPrefix . "http" }}
     <img class="about-photo" src="{{ . }}" alt="{{ $.Params.photoAlt | default "Photo" }}">
+    {{- else }}
+    <img class="about-photo" src="{{ (strings.TrimPrefix "/" .) | relURL }}" alt="{{ $.Params.photoAlt | default "Photo" }}">
+    {{- end }}
     {{- else }}
     <div class="about-photo-placeholder">🧑‍💻</div>
     {{- end }}
