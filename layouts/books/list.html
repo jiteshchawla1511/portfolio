@@ -157,7 +157,7 @@
 <div class="books-grid" data-section="reading">
   {{ range $reading }}
   <div class="book-card" data-status="reading">
-    <img class="book-cover" src="{{ .Params.bookCover }}" alt="{{ .Title }}" loading="lazy"
+    <img class="book-cover" src="{{ .Params.bookCover | absURL }}" alt="{{ .Title }}" loading="lazy"
       onerror="this.src='https://via.placeholder.com/130x195/1a1a2e/ffffff?text=📖'">
     <span class="book-status status-reading">Reading</span>
     <div class="book-overlay">
@@ -174,7 +174,7 @@
 <div class="books-grid" data-section="finished">
   {{ range $finished }}
   <div class="book-card" data-status="finished">
-    <img class="book-cover" src="{{ .Params.bookCover }}" alt="{{ .Title }}" loading="lazy"
+    <img class="book-cover" src="{{ .Params.bookCover | absURL }}" alt="{{ .Title }}" loading="lazy"
       onerror="this.src='https://via.placeholder.com/130x195/1a1a2e/ffffff?text=📚'">
     <span class="book-status status-finished">Finished</span>
     <div class="book-overlay">
@@ -191,7 +191,7 @@
 <div class="books-grid" data-section="want">
   {{ range $want }}
   <div class="book-card" data-status="want">
-    <img class="book-cover" src="{{ .Params.bookCover }}" alt="{{ .Title }}" loading="lazy"
+    <img class="book-cover" src="{{ .Params.bookCover | absURL }}" alt="{{ .Title }}" loading="lazy"
       onerror="this.src='https://via.placeholder.com/130x195/1a1a2e/ffffff?text=🔖'">
     <span class="book-status status-want">Want</span>
     <div class="book-overlay">

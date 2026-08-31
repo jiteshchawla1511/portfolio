@@ -1,15 +1,15 @@
 {{- define "main" }}
 
 <style>
-.gallery-header { margin-bottom: 2rem; }
-.gallery-header p { color: var(--secondary); margin-top: 0.35rem; font-size: 0.97rem; }
+.food-header { margin-bottom: 2rem; }
+.food-header p { color: var(--secondary); margin-top: 0.35rem; font-size: 0.97rem; }
 
-.gallery-grid {
+.food-grid {
   columns: 3 220px;
   column-gap: 1rem;
   margin-top: 1.5rem;
 }
-.gallery-item {
+.food-item {
   break-inside: avoid;
   margin-bottom: 1rem;
   border-radius: 10px;
@@ -17,15 +17,15 @@
   position: relative;
   cursor: zoom-in;
 }
-.gallery-item img {
+.food-item img {
   width: 100%;
   display: block;
   border-radius: 10px;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
-.gallery-item:hover img {
+.food-item:hover img {
   transform: scale(1.02);
-  filter: brightness(0.85);
+  filter: brightness(0.9);
 }
 
 /* Lightbox */
@@ -61,7 +61,7 @@
   border: none;
 }
 .lightbox-close:hover { opacity: 1; }
-.gallery-empty {
+.food-empty {
   color: var(--secondary);
   font-size: 0.95rem;
   padding: 3rem 0;
@@ -69,24 +69,31 @@
 }
 </style>
 
-<header class="gallery-header">
+<header class="food-header">
   <h1 class="page-title">{{ .Title }}</h1>
-  <p>{{ .Description | default "Photos I've taken. Mostly things that caught my eye." }}</p>
+  <p>{{ .Description | default "Things I've cooked. Some of the results are good enough to photograph." }}</p>
 </header>
 
-{{- $images := readDir "static/images/gallery" }}
+{{- $images := readDir "static/images/food" }}
+{{- $validImages := slice }}
 {{- if $images }}
-<div class="gallery-grid">
   {{- range $images }}
-  {{- if or (strings.HasSuffix .Name ".jpg") (strings.HasSuffix .Name ".jpeg") (strings.HasSuffix .Name ".png") (strings.HasSuffix .Name ".webp") }}
-  <div class="gallery-item" onclick="openLightbox('{{ printf "images/gallery/%s" .Name | absURL }}')">
-    <img src="{{ printf "images/gallery/%s" .Name | absURL }}" alt="Photo by Jitesh Chawla" loading="lazy">
-  </div>
+    {{- if or (strings.HasSuffix .Name ".jpg") (strings.HasSuffix .Name ".jpeg") (strings.HasSuffix .Name ".png") (strings.HasSuffix .Name ".webp") }}
+      {{- $validImages = $validImages | append .Name }}
+    {{- end }}
   {{- end }}
+{{- end }}
+
+{{- if gt (len $validImages) 0 }}
+<div class="food-grid">
+  {{- range $validImages }}
+  <div class="food-item" onclick="openLightbox('{{ printf "images/food/%s" . | absURL }}')">
+    <img src="{{ printf "images/food/%s" . | absURL }}" alt="Food by Jitesh Chawla" loading="lazy">
+  </div>
   {{- end }}
 </div>
 {{- else }}
-<div class="gallery-empty">📷 Photos coming soon.</div>
+<div class="food-empty">🍳 Food photos coming soon! Drop images into <code>static/images/food/</code> to display them here.</div>
 {{- end }}
 
 <!-- Lightbox -->
